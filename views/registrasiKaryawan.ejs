@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Registrasi Karyawan</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="mt-5 title">Registrasi Karyawan</h1>
+        <div class="container mt-4">
+            <form action="">
+                <div class="nama mb-3">
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-control" placeholder="Nama" id="name">
+                </div>
+                <div class="alamat mb-3">
+                    <label for="alamat" class="form-label">Alamat</label>
+                    <input type="text" class="form-control" placeholder="Alamat" id="alamat">
+                </div>
+                <div class="tglLahir mb-3">
+                    <label for="tglLahir" class="form-label">Tanggal Lahir</label>
+                    <input type="date" class="form-control" placeholder="Tanggal Lahir" id="tglLahir">
+                </div>
+                <div class="tempatLahir mb-3">
+                    <label for="" class="form-label">Tempat Lahir</label>
+                    <input type="text" class="form-control" placeholder="Tempat Lahir">
+                </div>
+                <div class="pendidikan mb-3">
+                    <label for="" class="form-label">Pendidikan Terakhir</label>
+                    <select name="" id="" class="form-select" aria-label="Pendidikan Terakhir">
+                        <option selected disabled>Pilih Pendidikan Terakhir</option>
+                        <option value="SMP">SMP / Sederajat</option>
+                        <option value="SMA">SMA / Sederajat</option>
+                        <option value="D3">D3</option>
+                        <option value="S1">S1 / D4</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                        <option value="other">Lainnya</option>
+                    </select>
+                </div>
+                <div class="skills mb-3">
+                    <label for="skills" class="form-label">Skills</label>
+                    <input type="text" class="form-control" placeholder="Enter a skill" id="skills">
+                    <button type="button" class="btn btn-primary mt-2" id="addSkill">Add Skill</button>
+                    <div class="selected-skills mt-2">
+                        <!-- Selected skills will be displayed here -->
+                    </div>
+                    <input type="hidden" id="hiddenSkills" name="hiddenSkills">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const skillsInput = document.getElementById("skills");
+            const addSkillButton = document.getElementById("addSkill");
+            const selectedSkillsContainer = document.querySelector(".selected-skills");
+            const hiddenSkillsInput = document.getElementById("hiddenSkills");
+    
+            const selectedSkills = [];
+    
+            const updateHiddenSkillsInput = () => {
+                hiddenSkillsInput.value = selectedSkills.join(",");
+            };
+    
+            const addSkill = () => {
+                const skill = skillsInput.value.trim();
+                if (skill !== "") {
+                    selectedSkills.push(skill);
+                    updateHiddenSkillsInput();
+    
+                    const skillElement = document.createElement("div");
+                    skillElement.classList.add("badge", "bg-secondary", "me-2", "mb-2");
+                    skillElement.textContent = skill;
+                    selectedSkillsContainer.appendChild(skillElement);
+                    skillsInput.value = "";
+                }
+            };
+    
+            addSkillButton.addEventListener("click", addSkill);
+        });
+    </script>
+    
+    
+</body>
+</html>
