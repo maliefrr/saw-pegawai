@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Registrasi Karyawan</title>
 </head>
 <body>
@@ -43,13 +44,14 @@
                 <div class="skills mb-3">
                     <label for="skills" class="form-label">Skills</label>
                     <input type="text" class="form-control" placeholder="Enter a skill" id="skills">
-                    <button type="button" class="btn btn-primary mt-2" id="addSkill">Add Skill</button>
-                    <div class="selected-skills mt-2">
+                    <button type="button" class="btn btn-warning mt-2 mb-3" id="addSkill">Add Skill</button>
+                    <div class="selected-skills mt-2 mb-3">
                         <!-- Selected skills will be displayed here -->
                     </div>
                     <input type="hidden" id="hiddenSkills" name="hiddenSkills">
                 </div>
             </form>
+            <button class="btn btn-primary mb-5" type="submit">Submit</button>
         </div>
     </div>
     <script src="/js/bootstrap.min.js"></script>

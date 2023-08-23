@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 require("dotenv").config()
+require("./models/index")
+
 
 // middleware
 app.set("view engine", "ejs")
