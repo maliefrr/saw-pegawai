@@ -25,5 +25,10 @@ const postKaryawanRegister = async (req, res) => {
     }
 }
 
+const postUserRegister = (req,res) => {
+    console.log(req.body)
+    res.redirect("/register/user")
+}
 
-module.exports = {getKaryawanRegisterPage, postKaryawanRegister}
+
+module.exports = {getKaryawanRegisterPage, postKaryawanRegister, postUserRegister}
