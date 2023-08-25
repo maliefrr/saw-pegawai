@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/karyawan", getKaryawanRegisterPage);
 router.get("/user", (req,res) => {
-    res.send("user registration")
+    res.render("registrasiUser")
 })
 
 

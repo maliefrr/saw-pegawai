@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Registrasi User</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="mt-5 title">Registrasi User</h1>
+        <div class="container mt-3">
+            <form action="/registrasi/user/add" method="post">
+                <div class="username mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username">
+                </div>
+                <div class="password mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+                </div>
+                <div class="passwordConfirmation mb-3">
+                    <label for="passwordConfirmation" class="form-label">Password Confirmation</label>
+                    <input type="password" class="form-control" placeholder="Password Confirmation" name="passwordConfirmation" id="passwordConfirmation">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
