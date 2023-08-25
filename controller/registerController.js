@@ -1,12 +1,12 @@
-const express = require('express');
-const { CalonPegawai } = require('../models'); // Import the model correctly
-const router = express.Router();
+const {CalonPegawai} = require("../models/calonpegawai")
+const {User} = require("../models/user")
 
-router.get("/", (req, res) => {
+
+const getKaryawanRegisterPage = (req, res) => {
     res.render("registrasiKaryawan");
-});
+}
 
-router.post("/add", async (req, res) => {
+const postKaryawanRegister = async (req, res) => {
     try {
         const data = await CalonPegawai.create({
             nama: req.body.nama,
@@ -23,6 +23,7 @@ router.post("/add", async (req, res) => {
         console.error("Error adding data to the database:", error);
         res.status(500).send("An error occurred while adding data.");
     }
-});
+}
 
-module.exports = router;
+
+module.exports = {getKaryawanRegisterPage, postKaryawanRegister}
