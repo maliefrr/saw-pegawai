@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const {user} = require("../models")
+const {user, CalonPegawai} = require("../models")
 const bcrypt = require("bcrypt")
 
 
@@ -9,16 +9,21 @@ const getDashboardPages = (req,res) => {
         req.flash("error","You Must login first")
         res.redirect("/login")
     }else {
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET, async (err, decoded) => {
             if (err) {
               // Token has expired or is invalid
               req.flash("error",err.message)
               console.error('Token expired or invalid:', err.message);
               res.redirect("/login")
             } else {
-              // Token is valid
-              console.log('Token is valid:', decoded);
-              res.send("You're Logged In")
+              
+                const dataCalonPegawai = await CalonPegawai.findAll()
+
+              res.render("dashboard",{
+                error : req.flash("error"),
+                success : req.flash("success"),
+                calonPegawai : dataCalonPegawai
+              })
             }
           }); 
     }

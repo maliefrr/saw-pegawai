@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Login Pages</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <% if(error.length > 0) {  %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>  
+        <% } %>
+          
+        <% if(success.length > 0){  %> 
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Sukses</strong> <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>  
+          <% } %>
+          <table class="table">
+            <thead>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Tempat & Tanggal Lahir</th>
+                <th>Pendidikan Terakhir</th>
+                <th>Skills</th>
+            </thead>
+            <tbody>
+                <% for(let i = 0 ; i < calonPegawai.length ; i++){ %>
+                <tr>
+                    <td><%= calonPegawai[i]["dataValues"]["nama"] %></td>
+                    <td><%= calonPegawai[i]["dataValues"]["alamat"] %></td>
+                    <td><%= calonPegawai[i]["dataValues"]["tempat_lahir"] %>, <%= calonPegawai[i]["dataValues"]["tgl_lahir"] %></td>
+                    <td><%= calonPegawai[i]["dataValues"]["pendidikan_terakhir"] %></td>
+                    <td>
+                        <% const skills = JSON.parse(calonPegawai[i]["dataValues"]["skills"]) %>
+                        <% for(let j = 0 ; j < skills.length ; j++) { %>
+                            <%=skills[j]%>
+                        <%}%>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+          </table>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
