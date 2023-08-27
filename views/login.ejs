@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Login Pages</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <% if(error.length > 0) {  %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>  
+        <% } %>
+          
+        <% if(success.length > 0){  %> 
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Sukses</strong> <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>  
+          <% } %>
+    <form action="/login" method="post">
+        <div class="username mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+        </div>
+        <div class="password mb-3">
+            <label for="password" class="form-label">Username</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button class="btn btn-primary">Login</button>
+    </form>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -27,6 +27,7 @@ app.use(cookieParser(process.env.SECRET));
 app.use(flash());
 
 // load routes
+app.use("/", require("./routes/mainRoutes"))
 app.use("/register", require("./routes/registerRoutes"))
 
 const port = process.env.PORT || 3000
