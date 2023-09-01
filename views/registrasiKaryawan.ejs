@@ -9,7 +9,8 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1 class="mt-5 title">Registrasi Karyawan</h1>
+        <h1 class="mt-5 title">Form Pendaftaran Karyawan</h1>
+        <h2 class="title mb-3">Teknisi</h2>
         <div class="container mt-4">
             <% if(error.length > 0) {  %>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -56,6 +57,7 @@
                 </div>
                 <div class="skills mb-3">
                     <label for="skills" class="form-label">Skills</label>
+                    <p class="keterangan">Jika memiliki ketrampilan seperti Menguasai pengoperasian, perawatan dan perbaikan Equipment/Mesin cukup tuliskan (Jaw crusher, Hammer Roller crusher, dsb)</p>
                     <input type="text" class="form-control" placeholder="Enter a skill" id="skills">
                     <button type="button" class="btn btn-warning mt-2 mb-3" id="addSkill">Add Skill</button>
                     <div class="selected-skills mt-2 mb-3">

@@ -20,8 +20,11 @@
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Sukses</strong> <%= success %>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>  
-          <% } %>
+        </div>  
+        <% } %>
+        <form action="/logout" method="post">
+            <button class="btn btn-danger">Logout</button>
+        </form>
           <table class="table">
             <thead>
                 <th>Nama</th>
@@ -47,6 +50,7 @@
                 <%}%>
             </tbody>
           </table>
+          <a href="/hasil" class="btn btn-primary">Hitung SAW</a>
     <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

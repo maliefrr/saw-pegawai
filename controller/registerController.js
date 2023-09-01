@@ -29,9 +29,9 @@ const postKaryawanRegister = async (req, res) => {
             skills: req.body.skill
         });
 
-        req.flash("success", "Data berhasil ditambahkan ke database")
+        req.flash("success", "Selamat Kamu Telah berhasil mendaftar")
         console.log(`Data has been successfully added to database:`, data);
-        res.redirect("/register/karyawan");
+        res.redirect("/login");
     } catch (error) {
         console.error("Error adding data to the database:", error);
         req.flash("error", "Terjadi Kesalahan saat menambahkan data ke database")
