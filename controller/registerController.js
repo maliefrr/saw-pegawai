@@ -20,18 +20,25 @@ const getUserRegisterPage = (req,res) => {
 
 const postKaryawanRegister = async (req, res) => {
     try {
-        const data = await CalonPegawai.create({
-            nama: req.body.nama,
-            alamat: req.body.alamat,
-            tgl_lahir: req.body.tgl_lahir,
-            tempat_lahir: req.body.tempat_lahir,
-            pendidikan_terakhir: req.body.pendidikan,
-            skills: req.body.skill
-        });
-
-        req.flash("success", "Selamat Kamu Telah berhasil mendaftar")
-        console.log(`Data has been successfully added to database:`, data);
-        res.redirect("/login");
+        const {nama,alamat,tgl_lahir,tempat_lahir,pendidikan_terakhir,skill} = req.body
+        console.log(req.body)
+        if(!nama || !alamat || !tgl_lahir || !tempat_lahir || !pendidikan_terakhir || !skill){
+            req.flash("error","Form tidak boleh kosong")
+            res.redirect("/register/karyawan")
+        } else {
+            const data = await CalonPegawai.create({
+                nama: nama,
+                alamat: alamat,
+                tgl_lahir: tgl_lahir,
+                tempat_lahir: tempat_lahir,
+                pendidikan_terakhir: pendidikan_terakhir,
+                skills: skill
+            });
+    
+            req.flash("success", "Selamat Kamu Telah berhasil mendaftar")
+            console.log(`Data has been successfully added to database:`, data);
+            res.redirect("/login");
+        }
     } catch (error) {
         console.error("Error adding data to the database:", error);
         req.flash("error", "Terjadi Kesalahan saat menambahkan data ke database")
