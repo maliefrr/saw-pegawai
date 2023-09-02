@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     tgl_lahir: DataTypes.DATE,
     tempat_lahir: DataTypes.STRING,
     pendidikan_terakhir: DataTypes.STRING,
-    skills: DataTypes.STRING
+    skills: DataTypes.STRING,
+    no_telp: DataTypes.STRING,
+    email: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'CalonPegawai',
