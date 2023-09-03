@@ -74,10 +74,17 @@
                                 <input type="text" class="form-control" placeholder="Enter a skill" id="skills">
                                 <button type="button" class="btn btn-warning mt-2 mb-3" id="addSkill">Add Skill</button>
                                 <div class="selected-skills mt-2 mb-3">
-                                    <!-- Selected skills will be displayed here -->
+                                  <!-- Selected skills will be displayed here -->
                                 </div>
                                 <input type="hidden" id="hiddenSkills" name="skill">
-                            </div>
+                                
+                                <!-- Add the skill template for displaying skills -->
+                                <template id="skill-template">
+                                  <div class="badge bg-secondary me-2 mb-2">
+                                    <span class="skill-name"></span>
+                                    <button class="btn btn-sm delete-skill" type="button">X</button>
+                                  </div>
+                                </template>
 
                           <button class="btn btn-outline-light btn-lg px-5" type="submit">Daftar</button>
                         </div>
@@ -90,44 +97,67 @@
       </section>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const skillsInput = document.getElementById("skills");
-            const addSkillButton = document.getElementById("addSkill");
-            const selectedSkillsContainer = document.querySelector(".selected-skills");
-            const hiddenSkillsInput = document.getElementById("hiddenSkills");
-
-            const selectedSkills = [];
-
-            const updateHiddenSkillsInput = () => {
-                hiddenSkillsInput.value = JSON.stringify(selectedSkills);
-            };
-
-            const addSkill = () => {
-                const skill = skillsInput.value.trim();
-                if (skill !== "") {
-                    selectedSkills.push(skill);
-                    updateHiddenSkillsInput();
-
-                    const skillElement = document.createElement("div");
-                    skillElement.classList.add("badge", "bg-secondary", "me-2", "mb-2");
-                    skillElement.textContent = skill;
-                    selectedSkillsContainer.appendChild(skillElement);
-                    skillsInput.value = "";
-                }
-            };
-
-            // Function to handle Enter key press
-            const handleKeyPress = (event) => {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    addSkill();
-                }
-            };
-
-            addSkillButton.addEventListener("click", addSkill);
-            skillsInput.addEventListener("keypress", handleKeyPress);
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        const skillsInput = document.getElementById("skills");
+        const addSkillButton = document.getElementById("addSkill");
+        const selectedSkillsContainer = document.querySelector(".selected-skills");
+        const hiddenSkillsInput = document.getElementById("hiddenSkills");
+        const skillTemplate = document.getElementById("skill-template");
+    
+        const selectedSkills = [];
+    
+        const updateHiddenSkillsInput = () => {
+          hiddenSkillsInput.value = JSON.stringify(selectedSkills);
+        };
+    
+        const addSkill = () => {
+          const skill = skillsInput.value.trim();
+          if (skill !== "") {
+            const skillId = Date.now().toString(); // Generate a unique ID for the skill element
+            selectedSkills.push({ id: skillId, name: skill });
+            updateHiddenSkillsInput();
+    
+            const skillElement = document.importNode(skillTemplate.content, true);
+            const skillNameElement = skillElement.querySelector(".skill-name");
+            skillNameElement.textContent = skill;
+    
+            // Add a data attribute with the skill ID
+            skillElement.querySelector(".delete-skill").setAttribute("data-skill-id", skillId);
+    
+            // Add click event listener to delete skill
+            const deleteSkillButton = skillElement.querySelector(".delete-skill");
+            deleteSkillButton.addEventListener("click", () => {
+              const skillIdToRemove = deleteSkillButton.getAttribute("data-skill-id");
+              const skillIndex = selectedSkills.findIndex((item) => item.id === skillIdToRemove);
+              if (skillIndex !== -1) {
+                selectedSkills.splice(skillIndex, 1);
+                updateHiddenSkillsInput();
+                // Remove the skill element's parent, which is the badge div
+                selectedSkillsContainer.removeChild(deleteSkillButton.parentElement);
+              }
+            });
+    
+            selectedSkillsContainer.appendChild(skillElement);
+            skillsInput.value = "";
+          }
+        };
+    
+        // Function to handle Enter key press without form submission
+        const handleKeyPress = (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addSkill();
+          }
+        };
+    
+        addSkillButton.addEventListener("click", addSkill);
+        skillsInput.addEventListener("keypress", handleKeyPress);
+      });
     </script>
+    
+    
+    
+    
     
     
 </body>

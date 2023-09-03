@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Login Pages</title>
 </head>
-<body>
-    <h1>Hasil SAW</h1>
+<body class="gradient-custom">
+    <h1 class="mt-3 title">Hasil SAW</h1>
+    <div class="logout-container">
+        <a href="/" class="btn btn-warning">Kembali</a>
+    </div>
     <% if(error.length > 0) {  %>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error</strong> <%= error %>
@@ -21,7 +24,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>  
           <% } %>
-          <table class="table">
+          <table class="table table-custom mt-5">
             <thead>
                 <th>No</th>
                 <th>Nama Mahasiswa</th>

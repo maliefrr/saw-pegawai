@@ -1,5 +1,13 @@
 .title{
     text-align: center;
+    color: white;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Optional: Center the button vertically */
+  padding-right: 15px;
 }
 
 .keterangan {
@@ -15,4 +23,27 @@
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+}
+/* CSS to style the table and make it blend with the background */
+.table-custom {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha (4th value) to control transparency */
+    border-radius: 10px; /* Add rounded corners for a nicer look */
+    padding: 10px; /* Add some padding for spacing */
+    color: black; /* Set text color for the entire table */
+}
+
+/* Style for the table header */
+.table-custom thead th {
+    background-color: rgba(0, 0, 0, 0.2); /* Adjust header background transparency */
+    color: white; /* Set text color for headers */
+}
+
+/* Style for table rows */
+.table-custom tbody tr {
+    background-color: rgba(0, 0, 0, 0.1); /* Adjust row background transparency */
+}
+
+/* Style for table cell text */
+.table-custom td {
+    color: black; /* Set text color for table cells */
 }
