@@ -1,6 +1,7 @@
 const express = require("express")
 const session = require("express-session");
 const flash = require('connect-flash');
+const methodOverride = require("method-override")
 const cookieParser = require("cookie-parser");
 const app = express()
 const bodyParser = require('body-parser')
@@ -13,6 +14,7 @@ require("./models/index")
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(methodOverride('_method'))
 
 // setting up session
 app.use(

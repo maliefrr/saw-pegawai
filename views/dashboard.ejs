@@ -35,6 +35,7 @@
                 <th>Tempat & Tanggal Lahir</th>
                 <th>Pendidikan Terakhir</th>
                 <th>Skills</th>
+                <th>Action</th>
             </thead>
             <tbody>
                 <% for(let i = 0 ; i < calonPegawai.length ; i++){ %>
@@ -48,6 +49,11 @@
                         <% for(let j = 0 ; j < skills.length ; j++) { %>
                             <%=skills[j].name%>
                         <%}%>
+                    </td>
+                    <td>
+                        <form action='/delete/<%=calonPegawai[i]["dataValues"]["id"]%>?_method=DELETE' method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 <%}%>

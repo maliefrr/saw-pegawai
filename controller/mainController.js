@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 const {user, CalonPegawai} = require("../models")
 const bcrypt = require("bcrypt")
+const { where } = require("sequelize")
 
 
 const getDashboardPages = (req,res) => {
@@ -147,6 +148,26 @@ const login = async (req,res) => {
     }
 }
 
+const deleteCalonPegawai = (req,res) => {
+  const findData = CalonPegawai.findAll({
+    where: {
+        id : req.params.id
+    }
+  })
+  if(!findData) {
+    console.error("data not found")
+    res.redirect("/")
+  } else {
+    const data = CalonPegawai.destroy({
+      where: {
+        id : req.params.id
+      }
+    })
+    req.flash("success","Data berhasil dihapus")
+    res.redirect("/")
+  }
+}
+
 const logout = (req,res) => {
   res.clearCookie("authToken");
   req.flash("success", "Berhasil Logout")
@@ -156,4 +177,4 @@ const logout = (req,res) => {
 
 
 
-module.exports = { getDashboardPages , getLoginPages, login, getResult, logout}
+module.exports = { getDashboardPages , getLoginPages, login, getResult, logout, deleteCalonPegawai}
