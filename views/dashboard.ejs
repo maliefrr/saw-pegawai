@@ -46,7 +46,7 @@
                     <td>
                         <% const skills = JSON.parse(calonPegawai[i]["dataValues"]["skills"]) %>
                         <% for(let j = 0 ; j < skills.length ; j++) { %>
-                            <%=skills[j]%>
+                            <%=skills[j].name%>
                         <%}%>
                     </td>
                 </tr>

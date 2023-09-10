@@ -53,7 +53,8 @@ const getResult = async (req, res) => {
             name: "Skills",
             weights: {
               "jaw crusher": 0.05,
-              "hammer roller crusher": 0.05,
+              "hammer mill": 0.05,
+              "roller crusher": 0.05,
               "rotary sample divider": 0.05,
               pulvilizer: 0.05,
               "raymond mill": 0.05,
@@ -67,18 +68,21 @@ const getResult = async (req, res) => {
 
         const candidates = await CalonPegawai.findAll();
 
-        const sortedCandidates = candidates.map(candidate => {
+        const sortedCandidates = candidates.map((candidate) => {
           const totalWeightedScore = criteria.reduce((sum, criterion) => {
             if (criterion.name === "Pendidikan") {
               const educationLevel = candidate.pendidikan_terakhir;
               return sum + (criterion.weights[educationLevel] || 0);
             } else if (criterion.name === "Skills") {
               const candidateSkills = JSON.parse(candidate.skills);
+              
               const skillWeightedScore = candidateSkills.reduce(
                 (skillSum, skill) => {
-                  return (
-                    skillSum + (criterion.weights[skill.toLowerCase()] || 0)
-                  );
+                  if (typeof skill.name === "string") {
+                    return skillSum + (criterion.weights[skill.name.toLowerCase()] || 0);
+                  } else {
+                    return skillSum;
+                  }
                 },
                 0
               );
@@ -109,6 +113,7 @@ const getResult = async (req, res) => {
     });
   }
 };
+
 
 
 

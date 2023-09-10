@@ -31,7 +31,8 @@
                 <th>Nama Mahasiswa</th>
             </thead>
             <tbody>
-                <% for (let i = 0; i < Math.min(result.length, 5); i++) { %>
+                
+                <% for (let i = 0; i < result.length ; i++) { %>
                     <tr>
                         <td><%= i + 1%></td>
                         <td><%= result[i]["nama"] %></td>
