@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const {user, CalonPegawai} = require("../models")
+const {user, CalonPegawai, Penilaian} = require("../models")
 const bcrypt = require("bcrypt")
 const { where } = require("sequelize")
 
@@ -28,6 +28,41 @@ const getDashboardPages = (req,res) => {
             }
           }); 
     }
+}
+
+const penilaian = async (req,res) => {
+  const dataCalon = await CalonPegawai.findAll({
+    where : {
+      id : req.params.id
+    }
+  }
+  )
+  res.render("penilaian",{
+      error : req.flash("error"),
+      success : req.flash("success"),
+      nama : dataCalon[0].dataValues.nama,
+      id : dataCalon[0].dataValues.id
+  })
+}
+
+const postPenilaian = async (req,res) => {
+  try {
+    const data = await Penilaian.create({
+      id_calon : req.body.id_calon,
+      pendidikan : req.body.pendidikan,
+      pengalaman : req.body.pengalaman,
+      wawancara : req.body.wawancara,
+      keahlian: req.body.keahlian,
+      usia : req.body.usia
+    })
+    console.log(data)
+    req.flash("success", "Data penilaian berhasil tersimpan")
+    res.redirect("/")
+    
+  } catch (error) {
+    req.flash("error","Pegawai sudah diberi nilai")
+    res.redirect("/")
+  }
 }
 
 const getResult = async (req, res) => {
@@ -177,4 +212,4 @@ const logout = (req,res) => {
 
 
 
-module.exports = { getDashboardPages , getLoginPages, login, getResult, logout, deleteCalonPegawai}
+module.exports = { getDashboardPages , getLoginPages, login, getResult, logout, deleteCalonPegawai, penilaian, postPenilaian}

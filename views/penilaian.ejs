@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/logo-uho.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Penilaian</title>
+</head>
+<body>
+    <section class=" gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                    <% if(error.length > 0) {  %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error</strong> <%= error %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>  
+                    <% } %>      
+                    <% if(success.length > 0){  %> 
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Sukses</strong> <%= success %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>  
+                    <% } %>
+                    <form action="/penilaian" method="post">
+                        <input type="hidden" name="id_calon" value="<%=id%>">
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                          <h2 class="fw-bold mb-5 text-uppercase">Penilaian</h2>
+                          <div class="form-outline form-white mb-4">
+                              <label class="form-label" for="nama">Nama</label>
+                            <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama" disabled value="<%=nama%>"/>
+                          </div>
+                          <div class="form-outline form-white mb-4">
+                              <label class="form-label" for="pendidikan">Pendidikan</label>
+                            <input type="number" id="pendidikan" class="form-control" name="pendidikan" placeholder="Pendidikan" max="5" min="1"/>
+                          </div>
+                          <div class="form-outline form-white mb-4">
+                              <label class="form-label" for="pengalaman">Pengalaman</label>
+                            <input type="number" id="pengalaman" class="form-control" name="pengalaman" placeholder="Pengalaman" max="5" min="1"/>
+                          </div>
+                          <div class="form-outline form-white mb-4">
+                              <label class="form-label" for="wawancara">Wawancara</label>
+                            <input type="number" id="wawancara" class="form-control" name="wawancara" placeholder="Wawancara" max="5" min="1"/>
+                          </div>
+                          <div class="form-outline form-white mb-4">
+                              <label class="form-label" for="keahlian">Keahlian</label>
+                            <input type="number" id="keahlian" class="form-control" name="keahlian" placeholder="Keahlian" max="5" min="1"/>
+                          </div>
+                          <div class="form-outline form-white mb-4">
+                              <label class="form-label" for="usia">Usia</label>
+                            <input type="number" id="usia" class="form-control" name="usia" placeholder="Usia" max="5" min="1"/>
+                          </div>
+                          <button class="btn btn-outline-light btn-lg px-5" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

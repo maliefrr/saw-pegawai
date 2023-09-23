@@ -47,3 +47,7 @@
 .table-custom td {
     color: black; /* Set text color for table cells */
 }
+
+.action {
+    display: flex;
+}
