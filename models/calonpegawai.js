@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+// const Penilaian = require('./Penilaian'); 
 module.exports = (sequelize, DataTypes) => {
   class CalonPegawai extends Model {
     /**
@@ -11,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      CalonPegawai.hasOne(models.Penilaian, { foreignKey: 'id_calon' });
+
     }
   }
   CalonPegawai.init({

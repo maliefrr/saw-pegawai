@@ -77,78 +77,50 @@ const getResult = async (req, res) => {
         console.error("Token expired or invalid:", err.message);
         res.redirect("/login");
       } else {
-        const criteria = [
-          {
-            name: "Pendidikan",
-            weights: {
-              D3: 0.2,
-              S1: 0.3,
-            },
-          },
-          {
-            name: "Skills",
-            weights: {
-              "jaw crusher": 0.05,
-              "hammer mill": 0.05,
-              "roller crusher": 0.05,
-              "rotary sample divider": 0.05,
-              pulvilizer: 0.05,
-              "raymond mill": 0.05,
-              "disc mill": 0.05,
-              dryingshed: 0.05,
-              "oven mineral": 0.05,
-              "oven astm": 0.05,
-            },
-          },
-        ];
+        const criteria = {
+          'Penilaian.pendidikan': 30,
+          'Penilaian.pengalaman': 25,
+          'Penilaian.wawancara': 20,
+          'Penilaian.keahlian': 15,
+          'Penilaian.usia': 10
+        };
 
-        const candidates = await CalonPegawai.findAll();
-
-        const sortedCandidates = candidates.map((candidate) => {
-          const totalWeightedScore = criteria.reduce((sum, criterion) => {
-            if (criterion.name === "Pendidikan") {
-              const educationLevel = candidate.pendidikan_terakhir;
-              return sum + (criterion.weights[educationLevel] || 0);
-            } else if (criterion.name === "Skills") {
-              const candidateSkills = JSON.parse(candidate.skills);
-              
-              const skillWeightedScore = candidateSkills.reduce(
-                (skillSum, skill) => {
-                  if (typeof skill.name === "string") {
-                    return skillSum + (criterion.weights[skill.name.toLowerCase()] || 0);
-                  } else {
-                    return skillSum;
-                  }
-                },
-                0
-              );
-              return sum + skillWeightedScore;
-            } else {
-              return sum;
-            }
-          }, 0);
-          return {
-            nama: candidate.nama,
-            totalWeightedScore: totalWeightedScore,
-          };
+        // Fetch candidates with their attributes and Penilaian
+        const candidates = await CalonPegawai.findAll({
+          include: [Penilaian],
+          attributes: ['nama'],
+          raw: true
         });
 
-        // Sort candidates in descending order based on totalWeightedScore
-        sortedCandidates.sort(
-          (a, b) => b.totalWeightedScore - a.totalWeightedScore
-        );
+        // Calculate the total score for each candidate
+        candidates.forEach(candidate => {
+          candidate.totalScore = 0;
+          console.log(candidate)
+          for (const key in criteria) {
+            console.log(key)
+            if (key in candidate) {
+              const score = (candidate[key] / 5) * criteria[key];
+              candidate.totalScore += score;
+            }
+          }
+        });
 
-        console.log(sortedCandidates);
+        // Sort candidates in descending order based on totalScore
+        candidates.sort((a, b) => b.totalScore - a.totalScore);
+
+        // Log the sorted candidates
+        console.log(candidates);
 
         res.render("hasilSAW", {
           error: req.flash("error"),
           success: req.flash("success"),
-          result: sortedCandidates,
+          result: candidates // Pass the sorted candidates to your view
         });
       }
     });
   }
 };
+
 
 
 
