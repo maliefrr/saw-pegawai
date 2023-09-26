@@ -155,8 +155,8 @@ const login = async (req,res) => {
     }
 }
 
-const deleteCalonPegawai = (req,res) => {
-  const findData = CalonPegawai.findAll({
+const deleteCalonPegawai = async (req,res) => {
+  const findData = await CalonPegawai.findAll({
     where: {
         id : req.params.id
     }
@@ -165,11 +165,17 @@ const deleteCalonPegawai = (req,res) => {
     console.error("data not found")
     res.redirect("/")
   } else {
-    const data = CalonPegawai.destroy({
+    const dataPenilaian = await Penilaian.destroy({
+      where : {
+      id_calon : req.params.id
+    }
+  }) 
+    const data = await CalonPegawai.destroy({
       where: {
         id : req.params.id
       }
     })
+    console.log(dataPenilaian,data)
     req.flash("success","Data berhasil dihapus")
     res.redirect("/")
   }
